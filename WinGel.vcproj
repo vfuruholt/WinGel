@@ -275,7 +275,11 @@
 					>
 				</File>
 			</File>
-			<File
+      <File
+				RelativePath=".\MoleculeM.h"
+				>
+      </File>
+      <File
 				RelativePath=".\resource.h"
 				>
 			</File>

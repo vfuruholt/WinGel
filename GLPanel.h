@@ -4,6 +4,7 @@
 #include "GlSceneM.h"
 #include "CubeM.h"
 #include "HorizonM.h"
+#include "MoleculeM.h"
 
 using namespace System::Windows::Forms;
 
