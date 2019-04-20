@@ -270,10 +270,13 @@ namespace WinGel {
 			array<String^>^ files = (array<String^>^)e->Data->GetData( DataFormats::FileDrop );
 
 			for (int i = 0; i < files->Length; ++i) {
-				if (files[i]->EndsWith(".dat")) {
+				if (files[i]->Contains("_EM.")) {
+					// Recognize file as an EM data file if the filename less extension ends with _EM
 					// Create EmData wrapper object and try to load data
 				}
-				else {
+				else if (files[i]->Contains("_Horizon.")) {
+					// Recognize file as a Horizon data file if the filename less extension ends with _Horizon
+					// Create Horizon wrapper object and try to load data
 					try {
 						HorizonM^ horizon = gcnew HorizonM(files[i]);
 						this->glPanel->AddObject(horizon);
@@ -282,6 +285,22 @@ namespace WinGel {
 					catch (Exception^ ex) {
 						// Do nothing
 					}
+				}
+				else if (files[i]->Contains("_Molecule.")) {
+					// Recognize file as a Molecule data file if the filename less extension ends with _Molecule
+					// Create Molecule wrapper object and try to load data
+					try {
+						MoleculeM^ molecule = gcnew MoleculeM(files[i]);
+						this->glPanel->AddObject(molecule);
+						this->objectTree->Nodes->Add(files[i]->Substring(files[i]->LastIndexOf("\\") + 1));
+					}
+					catch (Exception^ ex) {
+						// Do nothing
+					}
+				}
+				else {
+					// Do nothing
+					// Add a warning message
 				}
 			}
 		}
